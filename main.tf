@@ -22,3 +22,9 @@ resource "aws_ssm_parameter" "parameter-s3-bucket-test" {
     Stage = "${var.stage}"
   }
 }
+
+resource "aws_ses_template" "confirm-email-template" {
+  name    = "${var.namespace}-${var.stage}-confirm-email-template"
+  subject = "{{subject}}",
+  html    = ""
+}
