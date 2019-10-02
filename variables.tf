@@ -19,3 +19,8 @@ variable "stage" {
 variable "bucket_name" {
   description = "Bucket name"
 }
+
+variable "alfredpad-log-level" {
+  description = "Log level for alfredpad"
+  default = "TRACE"
+}

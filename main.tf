@@ -23,4 +23,15 @@ resource "aws_ssm_parameter" "parameter-s3-bucket-test" {
   }
 }
 
+resource "aws_ssm_parameter" "alfredpad-log-level" {
+  description = "Log level for alfredpad"
+  name = "/config/alfredpad-api/logging/level/com/adirit"
+  type = "String"
+  value = "${var.alfredpad-log-level}"
+  tags {
+    Namespace = "${var.namespace}"
+    Stage = "${var.stage}"
+  }
+}
+
 
