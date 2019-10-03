@@ -8,6 +8,7 @@
 ################################################################################
 module "user-table" {
   source = "git::https://github.com/cloudposse/terraform-aws-dynamodb.git?ref=master"
+  version = "1.66.0"
   namespace = "${var.namespace}"
   stage = "${var.stage}"
   name = "User"
@@ -51,82 +52,6 @@ module "user-table" {
     }
 
   ]
-}
-
-module "property-table" {
-  source = "git::https://github.com/cloudposse/terraform-aws-dynamodb.git?ref=master"
-  namespace = "${var.namespace}"
-  stage = "${var.stage}"
-  name = "Property"
-  hash_key = "Id"
-  autoscale_write_target = "80"
-  autoscale_read_target = "80"
-  autoscale_min_read_capacity = "1"
-  autoscale_max_read_capacity = "100"
-  autoscale_min_write_capacity = "1"
-  autoscale_max_write_capacity = "100"
-  dynamodb_attributes = [
-    {
-      name = "Id"
-      type = "S"
-    },
-    {
-      name = "PropertyId"
-      type = "S"
-    },
-    {
-      name = "PropertyDataType"
-      type = "S"
-    },
-    {
-      name = "AgreementId"
-      type = "S"
-    }
-  ]
-  enable_encryption = true
-  ttl_attribute = "Expires"
-  global_secondary_index_map = [
-    {
-      name = "PropertyDataTypeIndex"
-      hash_key = "PropertyId"
-      range_key = "PropertyDataType"
-      read_capacity = "100"
-      write_capacity = "100"
-      projection_type = "KEYS_ONLY"
-    },
-    {
-      name = "BillIndex"
-      hash_key = "AgreementId"
-      range_key = "PropertyDataType"
-      read_capacity = "100"
-      write_capacity = "100"
-      projection_type = "KEYS_ONLY"
-    }
-  ]
-  enable_streams = true
-  stream_view_type = "NEW_AND_OLD_IMAGES"
-}
-
-module "token-table" {
-  source = "git::https://github.com/cloudposse/terraform-aws-dynamodb.git?ref=master"
-  namespace = "${var.namespace}"
-  stage = "${var.stage}"
-  name = "token"
-  hash_key = "TokenId"
-  autoscale_write_target = "80"
-  autoscale_read_target = "80"
-  autoscale_min_read_capacity = "1"
-  autoscale_max_read_capacity = "100"
-  autoscale_min_write_capacity = "1"
-  autoscale_max_write_capacity = "100"
-  dynamodb_attributes = [
-    {
-      name = "TokenId"
-      type = "S"
-    }
-  ]
-  enable_encryption = true
-  ttl_attribute = "Expires"
 }
 ################################################################################
 # Parameter Store Resources
