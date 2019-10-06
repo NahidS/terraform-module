@@ -37,17 +37,21 @@ module "user-table" {
   global_secondary_index_map = [
     {
       name = "EmailIndex"
+      range_key = ""
       hash_key = "Email"
       read_capacity = "100"
       write_capacity = "100"
       projection_type = "KEYS_ONLY"
+      non_key_attributes = ["", ""]
     },
     {
       name = "FacebookIndex"
+      range_key = ""
       hash_key = "FacebookId"
       read_capacity = "100"
       write_capacity = "100"
       projection_type = "KEYS_ONLY"
+      non_key_attributes = ["", ""]
     }
 
   ]
