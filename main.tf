@@ -8,7 +8,6 @@
 ################################################################################
 module "user-table" {
   source = "git::https://github.com/cloudposse/terraform-aws-dynamodb.git?ref=tags/0.10.0"
-  version = "1.66.0"
   namespace = "${var.namespace}"
   stage = "${var.stage}"
   name = "User"
